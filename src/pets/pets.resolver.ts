@@ -2,6 +2,8 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { PetsService } from './pets.service';
 import { Pet } from './entities/pet.entity';
 import { CreatePetInput } from './dto/create-pet.input';
+import { UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 // import { UpdatePetInput } from './dto/update-pet.input';
 
 @Resolver(() => Pet)
@@ -14,6 +16,7 @@ export class PetsResolver {
   }
 
   @Query(() => [Pet], { name: 'pets' })
+  @UseGuards(JwtAuthGuard)
   findAll() {
     return this.petsService.findAll();
   }

@@ -8,16 +8,41 @@ type Pet {
   type: String
 }
 
+type User {
+  id: String!
+  username: String!
+  password: String!
+}
+
+type LoginReponse {
+  access_token: String!
+  user: User!
+}
+
 type Query {
   pets: [Pet!]!
   pet(id: Int!): Pet!
+  users: [User!]!
+  user(username: String!): User!
 }
 
 type Mutation {
   createPet(createPetInput: CreatePetInput!): Pet!
   removePet(id: Int!): Pet!
+  createUser(createUserInput: CreateUserInput!): User!
+  login(loginUserInput: LoginUserInput!): LoginReponse!
 }
 
 input CreatePetInput {
   type: String
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+}
+
+input LoginUserInput {
+  username: String!
+  password: String!
 }
