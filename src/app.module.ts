@@ -14,6 +14,10 @@ import { AuthModule } from './auth/auth.module';
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       driver: ApolloDriver,
+      formatError: (error) => {
+        delete error.locations;
+        return error;
+      },
     }),
     TypeOrmModule.forRoot({
       type: 'sqlite',
