@@ -14,5 +14,10 @@ type Query {
 }
 
 type Mutation {
+  createPet(createPetInput: CreatePetInput!): Pet!
   removePet(id: Int!): Pet!
+}
+
+input CreatePetInput {
+  type: String
 }
